@@ -1,5 +1,6 @@
 import './globals.css';
 
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter, Shadows_Into_Light } from 'next/font/google';
 import type React from 'react';
@@ -26,14 +27,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body
-        className={cn(inter.className, shadowsIntoLight.variable, 'container')}
-      >
-        <Navigation />
-        <main className='my-4'>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body
+          className={cn(
+            inter.className,
+            shadowsIntoLight.variable,
+            'container flex flex-col h-screen',
+          )}
+        >
+          <Navigation />
+          <main className='my-4 flex-1'>{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

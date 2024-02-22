@@ -2,7 +2,7 @@ import { BackgroundCard } from '../global/BackgroundCard';
 
 export const Footer = () => {
   return (
-    <BackgroundCard color='green'>
+    <BackgroundCard color='green' className='mb-5'>
       <footer>
         <div className='space-y-2'>
           <p className='text-2xl font-semibold text-primary-foreground font-shadow'>
