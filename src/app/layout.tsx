@@ -1,14 +1,19 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Shadows_Into_Light } from 'next/font/google';
 import type React from 'react';
 
 import { Footer } from '~/components/site/Footer';
 import { Navigation } from '~/components/site/Navigation';
 import { cn } from '~/lib/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const shadowsIntoLight = Shadows_Into_Light({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-shadow',
+});
 
 export const metadata: Metadata = {
   title: 'Peak',
@@ -22,9 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={cn(inter.className)}>
+      <body
+        className={cn(inter.className, shadowsIntoLight.variable, 'container')}
+      >
         <Navigation />
-        <main className='container my-4'>{children}</main>
+        <main className='my-4'>{children}</main>
         <Footer />
       </body>
     </html>

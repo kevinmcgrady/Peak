@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-shadow {
+  font-family: var(--font-shadow);
+}
+
 @layer base {
   :root {
     --gradient: linear-gradient(to top left, #00c6ff, #0072ff);

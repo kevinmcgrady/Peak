@@ -1,3 +1,4 @@
+import { BackgroundCard } from '~/components/global/BackgroundCard';
 import { CategoryNav } from '~/components/global/CategoryNav';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
 import { SearchDatePicker } from '~/components/global/SearchDatePicker';
@@ -13,8 +14,8 @@ export default function Home() {
         subtitle='Find your next breathtaking taking moment'
       />
       <div className='grid grid-cols-2 gap-4'>
-        <div>
-          <div className='bg-gray-100 rounded-2xl p-5 gap-y-5 flex flex-col'>
+        <div className='gap-y-5 flex flex-col'>
+          <BackgroundCard>
             <div className='flex items-center justify-between'>
               <CategoryNav categories={['Hotel', 'House', 'Village']} />
               <p className='text-sm font-semibold text-muted'>
@@ -47,11 +48,13 @@ export default function Home() {
                 title='Alps House'
               />
             </FeatureImageSlider>
-          </div>
-          <div className='bg-gray-100 rounded-2xl p-5 gap-y-5 flex flex-col mt-5'></div>
+          </BackgroundCard>
+          <BackgroundCard>hello</BackgroundCard>
         </div>
 
-        <div className='p-2 bg-green-50 rounded-2xl'></div>
+        <BackgroundCard color='green'>
+          <p>hello</p>
+        </BackgroundCard>
       </div>
     </main>
   );
