@@ -33,11 +33,11 @@ export default function RootLayout({
           className={cn(
             inter.className,
             shadowsIntoLight.variable,
-            'container flex flex-col h-screen',
+            'container',
           )}
         >
           <Navigation />
-          <main className='my-4 flex-1'>{children}</main>
+          <main className='my-4'>{children}</main>
           <Footer />
         </body>
       </html>

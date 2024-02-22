@@ -6,6 +6,14 @@
   font-family: var(--font-shadow);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @layer base {
   :root {
     --gradient: linear-gradient(to top left, #00c6ff, #0072ff);
