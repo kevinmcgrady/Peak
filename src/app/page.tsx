@@ -1,7 +1,7 @@
 import { BackgroundCard } from '~/components/global/BackgroundCard';
 import { CategoryNav } from '~/components/global/CategoryNav';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
-import { FilterNav } from '~/components/global/FilterNav';
+import { Map } from '~/components/global/Map';
 import { SearchDatePicker } from '~/components/global/SearchDatePicker';
 import { PropertyCard } from '~/components/property/PropertyCard';
 import { PropertyFeatureCard } from '~/components/property/PropertyFeatureCard';
@@ -34,29 +34,43 @@ export default function Home() {
                 rating={5}
                 title='Gostone'
                 pricePerNight='300'
+                lat='40.7135'
+                lng='-74.0066'
               />
               <PropertyCard
                 image={{ url: '/images/greece-hotel.jpg', alt: 'Holiday Homw' }}
                 rating={3.6}
                 title='Hearty'
                 pricePerNight='210'
+                lat='30.7135'
+                lng='-74.0066'
               />
               <PropertyCard
                 image={{ url: '/images/hall.jpg', alt: 'Holiday Homw' }}
                 rating={4.9}
                 title='Moonstar'
                 pricePerNight='150'
+                lat='50.7135'
+                lng='-74.0066'
               />
               <PropertyCard
                 image={{ url: '/images/see-view.jpg', alt: 'Holiday Homw' }}
                 rating={5.6}
                 title='Firefly'
                 pricePerNight='760'
+                lat='60.7135'
+                lng='-74.0066'
               />
             </FeatureImageSlider>
           </BackgroundCard>
           <BackgroundCard>
-            <FilterNav />
+            <div>
+              <h2 className='text-xl font-semibold'>Popular Properties</h2>
+              <h3 className='text-sm text-muted-foreground'>
+                Properties with the highest rating
+              </h3>
+            </div>
+
             <div className='grid grid-cols-2 gap-5'>
               <PropertyFeatureCard
                 distance='2.5'
@@ -94,9 +108,7 @@ export default function Home() {
           </BackgroundCard>
         </div>
         <div className='col-span-5'>
-          <BackgroundCard color='green'>
-            <p>hello</p>
-          </BackgroundCard>
+          <Map />
         </div>
       </div>
     </main>

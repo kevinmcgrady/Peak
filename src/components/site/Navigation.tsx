@@ -11,7 +11,7 @@ import { NavItems } from './NavItems';
 export const Navigation = async () => {
   const user = await currentUser();
   return (
-    <nav className='grid grid-cols-3 mt-5 sticky top-0 left-0 right-0 py-5 backdrop-blur-sm z-10'>
+    <nav className='grid grid-cols-3 mt-5 py-5'>
       <h1 className='text-2xl font-semibold text-primary-foreground font-shadow'>
         <Link href='/'>Peak</Link>
       </h1>
