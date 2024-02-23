@@ -25,8 +25,8 @@ export const PropertyFeatureCard = ({
   title,
 }: PropertyFeatureCardProps) => {
   return (
-    <div className='bg-white p-2 rounded-xl flex gap-x-2'>
-      <div className='w-[200px]'>
+    <div className='bg-white flex-col p-2 rounded-xl flex gap-x-2 md:flex-row'>
+      <div className='w-full md:w-[200px]'>
         <AspectRatio ratio={1 / 1}>
           <Image
             src={image.src}

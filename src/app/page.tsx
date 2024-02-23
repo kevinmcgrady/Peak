@@ -16,7 +16,7 @@ export default function Home() {
         subtitle='Find your next breathtaking taking moment'
       />
       <div className='grid grid-cols-12 gap-4'>
-        <div className='gap-y-5 flex flex-col col-span-7'>
+        <div className='gap-y-5 flex flex-col col-span-12 lg:col-span-7'>
           <BackgroundCard>
             <div className='flex items-center justify-between'>
               <CategoryNav categories={['Hotel', 'House', 'Village']} />
@@ -107,7 +107,7 @@ export default function Home() {
             </div>
           </BackgroundCard>
         </div>
-        <div className='col-span-5'>
+        <div className='lg:col-span-5 col-span-12'>
           <Map />
         </div>
       </div>
