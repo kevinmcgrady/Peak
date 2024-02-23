@@ -1,8 +1,9 @@
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { AspectRatio } from '../ui/aspect-ratio';
-import { Button } from '../ui/button';
+import { Button, buttonVariants } from '../ui/button';
 
 type PropertyFeatureCardProps = {
   image: {
@@ -14,6 +15,7 @@ type PropertyFeatureCardProps = {
   distance: string;
   noOfReviews: number;
   pricePerNight: string;
+  slug: string;
 };
 
 export const PropertyFeatureCard = ({
@@ -23,6 +25,7 @@ export const PropertyFeatureCard = ({
   pricePerNight,
   rating,
   title,
+  slug,
 }: PropertyFeatureCardProps) => {
   return (
     <div className='bg-white flex-col p-2 rounded-xl flex gap-x-2 md:flex-row'>
@@ -59,9 +62,16 @@ export const PropertyFeatureCard = ({
             </span>
             /night
           </p>
-          <Button size='sm' variant='secondary' className='rounded'>
+          <Link
+            href={`/property/${slug}`}
+            className={buttonVariants({
+              size: 'sm',
+              variant: 'secondary',
+              className: 'rounded-xl',
+            })}
+          >
             Details
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

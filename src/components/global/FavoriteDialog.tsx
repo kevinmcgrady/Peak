@@ -33,6 +33,7 @@ export const FavoriteDialog = () => {
             pricePerNight='100'
             rating={4.9}
             title='jkfjkfer'
+            slug='hfjrhfrf'
           />
           <PropertyFeatureCard
             distance='3.2'
@@ -41,6 +42,7 @@ export const FavoriteDialog = () => {
             pricePerNight='100'
             rating={4.9}
             title='jkfjkfer'
+            slug='hfjrhfrf'
           />
           <PropertyFeatureCard
             distance='3.2'
@@ -49,6 +51,7 @@ export const FavoriteDialog = () => {
             pricePerNight='100'
             rating={4.9}
             title='jkfjkfer'
+            slug='hfjrhfrf'
           />
           <PropertyFeatureCard
             distance='3.2'
@@ -57,6 +60,7 @@ export const FavoriteDialog = () => {
             pricePerNight='100'
             rating={4.9}
             title='jkfjkfer'
+            slug='hfjrhfrf'
           />
         </ScrollArea>
       </DialogContent>

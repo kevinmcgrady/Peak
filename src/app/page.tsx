@@ -1,7 +1,7 @@
 import { BackgroundCard } from '~/components/global/BackgroundCard';
 import { CategoryNav } from '~/components/global/CategoryNav';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
-import { Map } from '~/components/global/Map';
+import { MapComponent } from '~/components/global/Map/Map';
 import { SearchDatePicker } from '~/components/global/SearchDatePicker';
 import { PropertyCard } from '~/components/property/PropertyCard';
 import { PropertyFeatureCard } from '~/components/property/PropertyFeatureCard';
@@ -42,24 +42,24 @@ export default function Home() {
                 rating={3.6}
                 title='Hearty'
                 pricePerNight='210'
-                lat='30.7135'
-                lng='-74.0066'
+                lat='55.8504101'
+                lng='-4.2524682'
               />
               <PropertyCard
                 image={{ url: '/images/hall.jpg', alt: 'Holiday Homw' }}
                 rating={4.9}
                 title='Moonstar'
                 pricePerNight='150'
-                lat='50.7135'
-                lng='-74.0066'
+                lat='55.9823191'
+                lng='-3.4027764'
               />
               <PropertyCard
                 image={{ url: '/images/see-view.jpg', alt: 'Holiday Homw' }}
                 rating={5.6}
                 title='Firefly'
                 pricePerNight='760'
-                lat='60.7135'
-                lng='-74.0066'
+                lat='55.9225415'
+                lng='-4.5951304'
               />
             </FeatureImageSlider>
           </BackgroundCard>
@@ -79,6 +79,7 @@ export default function Home() {
                 pricePerNight='300'
                 rating={5.0}
                 title='Gostone'
+                slug='gostone'
               />
               <PropertyFeatureCard
                 distance='3.2'
@@ -87,6 +88,7 @@ export default function Home() {
                 pricePerNight='760'
                 rating={5.6}
                 title='Firefly'
+                slug='firefly'
               />
               <PropertyFeatureCard
                 distance='1.5'
@@ -95,6 +97,7 @@ export default function Home() {
                 pricePerNight='210'
                 rating={3.6}
                 title='Hearty'
+                slug='hearty'
               />
               <PropertyFeatureCard
                 distance='6.7'
@@ -103,12 +106,13 @@ export default function Home() {
                 pricePerNight='150'
                 rating={4.9}
                 title='Moonstar'
+                slug='moonstar'
               />
             </div>
           </BackgroundCard>
         </div>
         <div className='lg:col-span-5 col-span-12'>
-          <Map />
+          <MapComponent />
         </div>
       </div>
     </main>

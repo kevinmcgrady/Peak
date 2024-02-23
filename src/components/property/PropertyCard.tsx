@@ -2,7 +2,7 @@
 
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { AspectRatio } from '../ui/aspect-ratio';
 import { Badge } from '../ui/badge';
@@ -27,8 +27,18 @@ export const PropertyCard = ({
   lat,
   lng,
 }: PropertyCardProps) => {
+  const router = useRouter();
+
+  const handleOnClick = (e: any) => {
+    router.push(`/?lat=${lat}&lng=${lng}`, { scroll: false });
+  };
+
   return (
-    <Link scroll={false} href={`/?lat=${lat}&lng=${lng}`}>
+    <div
+      role='link'
+      className='cursor-pointer'
+      onClick={(e) => handleOnClick(e)}
+    >
       <AspectRatio className='bg-white rounded-xl'>
         <Image
           fill
@@ -51,6 +61,6 @@ export const PropertyCard = ({
           </span>
         </div>
       </AspectRatio>
-    </Link>
+    </div>
   );
 };
