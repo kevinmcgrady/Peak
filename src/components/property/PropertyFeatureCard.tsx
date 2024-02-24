@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { AspectRatio } from '../ui/aspect-ratio';
-import { Button, buttonVariants } from '../ui/button';
+import { buttonVariants } from '../ui/button';
 
 type PropertyFeatureCardProps = {
   image: {

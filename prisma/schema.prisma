@@ -10,8 +10,8 @@ datasource db {
 model Property {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   slug          String   @unique
-  lat           Int
-  lng           Int
+  lat           String
+  lng           String
   title         String   @unique
   rating        Int
   pricePerNight Int
