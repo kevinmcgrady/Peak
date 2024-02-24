@@ -7,8 +7,18 @@ import { PropertyCard } from '~/components/property/PropertyCard';
 import { PropertyFeatureCard } from '~/components/property/PropertyFeatureCard';
 import { Hero } from '~/components/site/Hero';
 import { getFullDate } from '~/lib/date-formatting';
+import { findOneProperty, getAllProperties } from '~/lib/queries/properties';
 
-export default function Home() {
+type HomeProps = {
+  searchParams: {
+    property: string;
+  };
+};
+
+export default async function Home({ searchParams }: HomeProps) {
+  const properties = await getAllProperties();
+  const mapProperty = await findOneProperty(searchParams.property);
+
   return (
     <main>
       <Hero
@@ -25,42 +35,16 @@ export default function Home() {
               </p>
             </div>
             <SearchDatePicker />
+
             <FeatureImageSlider
               title='Suitable options'
               subtitle=' Recommended hotels in area'
             >
-              <PropertyCard
-                image={{ url: '/images/holiday-home.jpg', alt: 'Holiday Homw' }}
-                rating={5}
-                title='Gostone'
-                pricePerNight='300'
-                lat='40.7135'
-                lng='-74.0066'
-              />
-              <PropertyCard
-                image={{ url: '/images/greece-hotel.jpg', alt: 'Holiday Homw' }}
-                rating={3.6}
-                title='Hearty'
-                pricePerNight='210'
-                lat='55.8504101'
-                lng='-4.2524682'
-              />
-              <PropertyCard
-                image={{ url: '/images/hall.jpg', alt: 'Holiday Homw' }}
-                rating={4.9}
-                title='Moonstar'
-                pricePerNight='150'
-                lat='55.9823191'
-                lng='-3.4027764'
-              />
-              <PropertyCard
-                image={{ url: '/images/see-view.jpg', alt: 'Holiday Homw' }}
-                rating={5.6}
-                title='Firefly'
-                pricePerNight='760'
-                lat='55.9225415'
-                lng='-4.5951304'
-              />
+              {[
+                ...properties.map((property) => (
+                  <PropertyCard key={property.id} property={property} />
+                )),
+              ]}
             </FeatureImageSlider>
           </BackgroundCard>
           <BackgroundCard>
@@ -72,47 +56,14 @@ export default function Home() {
             </div>
 
             <div className='grid grid-cols-2 gap-5'>
-              <PropertyFeatureCard
-                distance='2.5'
-                image={{ src: '/images/holiday-home.jpg', alt: 'Holiday Home' }}
-                noOfReviews={2}
-                pricePerNight='300'
-                rating={5.0}
-                title='Gostone'
-                slug='gostone'
-              />
-              <PropertyFeatureCard
-                distance='3.2'
-                image={{ src: '/images/see-view.jpg', alt: 'Holiday Home' }}
-                noOfReviews={4}
-                pricePerNight='760'
-                rating={5.6}
-                title='Firefly'
-                slug='firefly'
-              />
-              <PropertyFeatureCard
-                distance='1.5'
-                image={{ src: '/images/greece-hotel.jpg', alt: 'Holiday Home' }}
-                noOfReviews={18}
-                pricePerNight='210'
-                rating={3.6}
-                title='Hearty'
-                slug='hearty'
-              />
-              <PropertyFeatureCard
-                distance='6.7'
-                image={{ src: '/images/hall.jpg', alt: 'Holiday Home' }}
-                noOfReviews={7}
-                pricePerNight='150'
-                rating={4.9}
-                title='Moonstar'
-                slug='moonstar'
-              />
+              {properties.map((property) => (
+                <PropertyFeatureCard key={property.id} property={property} />
+              ))}
             </div>
           </BackgroundCard>
         </div>
         <div className='lg:col-span-5 col-span-12'>
-          <MapComponent />
+          <MapComponent property={mapProperty!} />
         </div>
       </div>
     </main>

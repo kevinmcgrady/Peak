@@ -8,7 +8,6 @@ import type React from 'react';
 import { Footer } from '~/components/site/Footer';
 import { Navigation } from '~/components/site/Navigation';
 import { cn } from '~/lib/utils';
-import { TRPCProvider } from '~/providers/trpc.provider';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const shadowsIntoLight = Shadows_Into_Light({
@@ -28,22 +27,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TRPCProvider>
-      <ClerkProvider>
-        <html lang='en'>
-          <body
-            className={cn(
-              inter.className,
-              shadowsIntoLight.variable,
-              'container',
-            )}
-          >
-            <Navigation />
-            <main className='my-4'>{children}</main>
-            <Footer />
-          </body>
-        </html>
-      </ClerkProvider>
-    </TRPCProvider>
+    <ClerkProvider>
+      <html lang='en'>
+        <body
+          className={cn(
+            inter.className,
+            shadowsIntoLight.variable,
+            'container',
+          )}
+        >
+          <Navigation />
+          <main className='my-4'>{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

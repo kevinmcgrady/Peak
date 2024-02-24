@@ -2,6 +2,7 @@
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { Property } from '@prisma/client';
 import { MapPin } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
@@ -11,12 +12,15 @@ import Map, { Layer, Marker, Popup } from 'react-map-gl';
 import { PropertyFeatureCard } from '../../property/PropertyFeatureCard';
 import { buildingsLayer } from './utils/buildingsLayer';
 
-export const MapComponent = () => {
+type MapComponentProps = {
+  property: Property;
+};
+
+export const MapComponent = ({ property }: MapComponentProps) => {
   const params = useSearchParams();
   const mapRef = useRef<MapRef | null>(null);
-
-  const lat = Number(params.get('lat'));
-  const lng = Number(params.get('lng'));
+  const lat = Number(property.lat);
+  const lng = Number(property.lng);
 
   useEffect(() => {
     if (mapRef?.current) {
@@ -46,11 +50,7 @@ export const MapComponent = () => {
       >
         <Layer {...buildingsLayer} />
 
-        <Marker
-          longitude={Number(params.get('lng'))}
-          latitude={Number(params.get('lat'))}
-          anchor='center'
-        >
+        <Marker longitude={lng} latitude={lat} anchor='center'>
           <MapPin size={18} className='fill-secondary stroke-none' />
         </Marker>
         <Popup
@@ -60,15 +60,7 @@ export const MapComponent = () => {
           maxWidth='400'
           offset={20}
         >
-          <PropertyFeatureCard
-            distance='3.1'
-            image={{ src: '/images/greece-hotel.jpg', alt: 'hotel' }}
-            noOfReviews={4}
-            pricePerNight='150'
-            rating={4}
-            title='jfhr'
-            slug='jhrjhgjr'
-          />
+          <PropertyFeatureCard property={property} />
         </Popup>
       </Map>
     </div>

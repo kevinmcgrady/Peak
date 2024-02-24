@@ -1,3 +1,4 @@
+import { Property } from '@prisma/client';
 import { Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,34 +7,17 @@ import { AspectRatio } from '../ui/aspect-ratio';
 import { buttonVariants } from '../ui/button';
 
 type PropertyFeatureCardProps = {
-  image: {
-    src: string;
-    alt: string;
-  };
-  title: string;
-  rating: number;
-  distance: string;
-  noOfReviews: number;
-  pricePerNight: string;
-  slug: string;
+  property: Property;
 };
 
-export const PropertyFeatureCard = ({
-  distance,
-  image,
-  noOfReviews,
-  pricePerNight,
-  rating,
-  title,
-  slug,
-}: PropertyFeatureCardProps) => {
+export const PropertyFeatureCard = ({ property }: PropertyFeatureCardProps) => {
   return (
     <div className='bg-white flex-col p-2 rounded-xl flex gap-x-2 md:flex-row'>
       <div className='w-full md:w-[200px]'>
         <AspectRatio ratio={1 / 1}>
           <Image
-            src={image.src}
-            alt={image.alt}
+            src={`/images/${property.imageUrl}`}
+            alt={property.title}
             fill
             className='object-cover rounded-xl'
           />
@@ -43,27 +27,26 @@ export const PropertyFeatureCard = ({
       <div className='w-full space-y-2 flex flex-col'>
         <div className='flex items-center justify-between'>
           <h2 className='text-lg font-semibold text-primary-foreground'>
-            {title}
+            {property.title}
           </h2>
           <Heart size={18} className='inline-block text-primary-foreground' />
         </div>
 
         <p className='text-sm gap-x-1 text-primary-foreground flex'>
           <Star className='fill-primary inline-block stroke-none' size={18} />
-          {rating}{' '}
-          <span className='text-muted-foreground'>({noOfReviews})</span>{' '}
-          {distance}km
+          {property.rating} <span className='text-muted-foreground'>(7)</span>{' '}
+          3.2km
         </p>
 
         <div className='flex items-center justify-between gap-x-2 pt-6'>
           <p className='text-sm'>
             <span className='text-base font-semibold text-primary-foreground'>
-              £{pricePerNight}
+              £{property.pricePerNight}
             </span>
             /night
           </p>
           <Link
-            href={`/property/${slug}`}
+            href={`/property/${property.slug}`}
             className={buttonVariants({
               size: 'sm',
               variant: 'secondary',
