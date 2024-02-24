@@ -4,7 +4,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { Property } from '@prisma/client';
 import { MapPin } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import type { MapRef } from 'react-map-gl';
 import Map, { Layer, Marker, Popup } from 'react-map-gl';
@@ -17,7 +16,6 @@ type MapComponentProps = {
 };
 
 export const MapComponent = ({ property }: MapComponentProps) => {
-  const params = useSearchParams();
   const mapRef = useRef<MapRef | null>(null);
   const lat = Number(property.lat);
   const lng = Number(property.lng);
@@ -29,7 +27,7 @@ export const MapComponent = ({ property }: MapComponentProps) => {
         lng: lng,
       });
     }
-  }, [lat, lng, params]);
+  }, [lat, lng]);
 
   return (
     <div className='w-full h-full relative overflow-hidden rounded-xl'>

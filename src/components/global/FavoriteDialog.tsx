@@ -25,44 +25,7 @@ export const FavoriteDialog = () => {
           <DialogTitle>Your favorites!</DialogTitle>
           <DialogDescription>Your favorite properties</DialogDescription>
         </DialogHeader>
-        <ScrollArea className='h-72'>
-          <PropertyFeatureCard
-            distance='3.2'
-            image={{ src: '/images/greece-hotel.jpg', alt: 'hotel' }}
-            noOfReviews={10}
-            pricePerNight='100'
-            rating={4.9}
-            title='jkfjkfer'
-            slug='hfjrhfrf'
-          />
-          <PropertyFeatureCard
-            distance='3.2'
-            image={{ src: '/images/greece-hotel.jpg', alt: 'hotel' }}
-            noOfReviews={10}
-            pricePerNight='100'
-            rating={4.9}
-            title='jkfjkfer'
-            slug='hfjrhfrf'
-          />
-          <PropertyFeatureCard
-            distance='3.2'
-            image={{ src: '/images/greece-hotel.jpg', alt: 'hotel' }}
-            noOfReviews={10}
-            pricePerNight='100'
-            rating={4.9}
-            title='jkfjkfer'
-            slug='hfjrhfrf'
-          />
-          <PropertyFeatureCard
-            distance='3.2'
-            image={{ src: '/images/greece-hotel.jpg', alt: 'hotel' }}
-            noOfReviews={10}
-            pricePerNight='100'
-            rating={4.9}
-            title='jkfjkfer'
-            slug='hfjrhfrf'
-          />
-        </ScrollArea>
+        <ScrollArea className='h-72'></ScrollArea>
       </DialogContent>
     </Dialog>
   );

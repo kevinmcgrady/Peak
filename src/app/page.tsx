@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import { BackgroundCard } from '~/components/global/BackgroundCard';
 import { CategoryNav } from '~/components/global/CategoryNav';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
@@ -17,7 +19,12 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const properties = await getAllProperties();
-  const mapProperty = await findOneProperty(searchParams.property);
+
+  const mapProperty = await findOneProperty(
+    searchParams.property || properties[0].slug,
+  );
+
+  if (!properties || !mapProperty) return notFound();
 
   return (
     <main>
@@ -63,7 +70,7 @@ export default async function Home({ searchParams }: HomeProps) {
           </BackgroundCard>
         </div>
         <div className='lg:col-span-5 col-span-12'>
-          <MapComponent property={mapProperty!} />
+          <MapComponent property={mapProperty} />
         </div>
       </div>
     </main>
