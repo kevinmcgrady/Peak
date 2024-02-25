@@ -1,6 +1,6 @@
 'use server';
 
-import { db } from '../db';
+import { db } from '../lib/db';
 import { getLoggedInUser } from './user';
 
 export const getUsersFavorites = async () => {

@@ -2,13 +2,12 @@
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { Favorite, Property } from '@prisma/client';
 import { MapPin } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import type { MapRef } from 'react-map-gl';
-import Map, { Layer, Marker, Popup } from 'react-map-gl';
+import MapboxMap, { Layer, Marker, Popup } from 'react-map-gl';
 
-import { PropertyWithFavorites } from '~/lib/types/propertyWith';
+import { PropertyWithFavorites } from '~/types/propertyWith';
 
 import { PropertyFeatureCard } from '../../property/PropertyFeatureCard';
 import { buildingsLayer } from './utils/buildingsLayer';
@@ -33,7 +32,7 @@ export const MapComponent = ({ property }: MapComponentProps) => {
 
   return (
     <div className='w-full h-full relative overflow-hidden rounded-xl'>
-      <Map
+      <MapboxMap
         style={{ overflow: 'hidden' }}
         ref={mapRef}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAP_API_KEY}
@@ -65,7 +64,7 @@ export const MapComponent = ({ property }: MapComponentProps) => {
             property={property}
           />
         </Popup>
-      </Map>
+      </MapboxMap>
     </div>
   );
 };

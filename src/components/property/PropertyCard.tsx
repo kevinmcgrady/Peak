@@ -5,7 +5,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { PropertyWithFavorites } from '~/lib/types/propertyWith';
+import { PropertyWithFavorites } from '~/types/propertyWith';
 
 import { FavoriteButton } from '../global/FavoriteButton';
 import { AspectRatio } from '../ui/aspect-ratio';
@@ -13,16 +13,14 @@ import { Badge } from '../ui/badge';
 
 type PropertyCardProps = {
   property: PropertyWithFavorites;
-  userId: string | undefined;
+  isPropertyFavorited?: boolean;
 };
 
-export const PropertyCard = ({ property, userId }: PropertyCardProps) => {
+export const PropertyCard = ({
+  property,
+  isPropertyFavorited,
+}: PropertyCardProps) => {
   const router = useRouter();
-  const hasUserFavorited = property.Favorite.find(
-    (favorite) => favorite.userId === userId,
-  );
-
-  console.log(hasUserFavorited);
 
   const handleOnClick = () => {
     router.push(`/?property=${property.slug}`, { scroll: false });
@@ -44,7 +42,7 @@ export const PropertyCard = ({ property, userId }: PropertyCardProps) => {
             /night
           </Badge>
           <FavoriteButton
-            isFavorited={!!hasUserFavorited}
+            isFavorited={isPropertyFavorited}
             propertyId={property.id}
           />
         </div>

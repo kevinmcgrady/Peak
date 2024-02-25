@@ -1,4 +1,4 @@
-import { syncUser } from '~/lib/queries/user';
+import { syncUser } from '~/queries/user';
 
 const DashboardPage = async () => {
   await syncUser();

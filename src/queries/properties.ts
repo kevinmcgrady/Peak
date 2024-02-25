@@ -1,6 +1,6 @@
 'use server';
 
-import { db } from '../db';
+import { db } from '../lib/db';
 
 export const getAllProperties = async () => {
   return await db.property.findMany({

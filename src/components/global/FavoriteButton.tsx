@@ -3,8 +3,8 @@
 import { Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { toggleFavorite } from '~/lib/queries/favorites';
 import { cn } from '~/lib/utils';
+import { toggleFavorite } from '~/queries/favorites';
 
 import { useToast } from '../ui/use-toast';
 

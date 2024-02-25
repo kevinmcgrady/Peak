@@ -2,7 +2,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { PropertyWithFavorites } from '~/lib/types/propertyWith';
+import { PropertyWithFavorites } from '~/types/propertyWith';
 
 import { FavoriteButton } from '../global/FavoriteButton';
 import { AspectRatio } from '../ui/aspect-ratio';
@@ -10,19 +10,15 @@ import { buttonVariants } from '../ui/button';
 
 type PropertyFeatureCardProps = {
   property: PropertyWithFavorites;
-  userId?: string | undefined;
+  isPropertyFavorited?: boolean;
   displayFavoriteButton?: boolean;
 };
 
 export const PropertyFeatureCard = ({
   property,
-  userId,
+  isPropertyFavorited = false,
   displayFavoriteButton = true,
 }: PropertyFeatureCardProps) => {
-  const hasUserFavorited = property.Favorite.find(
-    (favorite) => favorite.userId === userId,
-  );
-
   return (
     <div className='bg-white flex-col p-2 rounded-xl flex gap-x-2 md:flex-row'>
       <div className='w-full md:w-[200px]'>
@@ -43,7 +39,7 @@ export const PropertyFeatureCard = ({
           </h2>
           {displayFavoriteButton && (
             <FavoriteButton
-              isFavorited={!!hasUserFavorited}
+              isFavorited={isPropertyFavorited}
               propertyId={property.id}
               color='dark'
             />

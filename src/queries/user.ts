@@ -2,7 +2,7 @@
 
 import { currentUser } from '@clerk/nextjs';
 
-import { db } from '../db';
+import { db } from '../lib/db';
 
 export const syncUser = async () => {
   const authUser = await currentUser();

@@ -9,8 +9,8 @@ import { PropertyCard } from '~/components/property/PropertyCard';
 import { PropertyFeatureCard } from '~/components/property/PropertyFeatureCard';
 import { Hero } from '~/components/site/Hero';
 import { getFullDate } from '~/lib/date-formatting';
-import { findOneProperty, getAllProperties } from '~/lib/queries/properties';
-import { getLoggedInUser } from '~/lib/queries/user';
+import { findOneProperty, getAllProperties } from '~/queries/properties';
+import { getLoggedInUser } from '~/queries/user';
 
 type HomeProps = {
   searchParams: {
@@ -20,7 +20,6 @@ type HomeProps = {
 
 export default async function Home({ searchParams }: HomeProps) {
   const userDetails = await getLoggedInUser();
-
   const properties = await getAllProperties();
 
   const mapProperty = await findOneProperty(
@@ -51,13 +50,18 @@ export default async function Home({ searchParams }: HomeProps) {
               subtitle=' Recommended hotels in area'
             >
               {[
-                ...properties.map((property) => (
-                  <PropertyCard
-                    userId={userDetails?.id}
-                    key={property.id}
-                    property={property}
-                  />
-                )),
+                ...properties.map((property) => {
+                  const hasUserFavorited = property.Favorite.find(
+                    (favorite) => favorite.userId === userDetails?.id,
+                  );
+                  return (
+                    <PropertyCard
+                      isPropertyFavorited={!!hasUserFavorited}
+                      key={property.id}
+                      property={property}
+                    />
+                  );
+                }),
               ]}
             </FeatureImageSlider>
           </BackgroundCard>
@@ -70,13 +74,18 @@ export default async function Home({ searchParams }: HomeProps) {
             </div>
 
             <div className='grid grid-cols-2 gap-5'>
-              {properties.map((property) => (
-                <PropertyFeatureCard
-                  userId={userDetails?.id}
-                  key={property.id}
-                  property={property}
-                />
-              ))}
+              {properties.map((property) => {
+                const hasUserFavorited = property.Favorite.find(
+                  (favorite) => favorite.userId === userDetails?.id,
+                );
+                return (
+                  <PropertyFeatureCard
+                    isPropertyFavorited={!!hasUserFavorited}
+                    key={property.id}
+                    property={property}
+                  />
+                );
+              })}
             </div>
           </BackgroundCard>
         </div>

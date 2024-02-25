@@ -1,8 +1,7 @@
 import { Heart } from 'lucide-react';
 
-import { getUsersFavorites } from '~/lib/queries/favorites';
-import { getLoggedInUser } from '~/lib/queries/user';
 import { cn } from '~/lib/utils';
+import { getUsersFavorites } from '~/queries/favorites';
 
 import { PropertyFeatureCard } from '../property/PropertyFeatureCard';
 import { Button } from '../ui/button';
@@ -17,7 +16,6 @@ import {
 import { ScrollArea } from '../ui/scroll-area';
 
 export const FavoriteDialog = async () => {
-  const userDeatils = await getLoggedInUser();
   const favorites = await getUsersFavorites();
   const hasFavorites = favorites && favorites.length > 0;
 
@@ -46,7 +44,7 @@ export const FavoriteDialog = async () => {
           <ScrollArea className='h-72'>
             {favorites.map((favorite) => (
               <PropertyFeatureCard
-                userId={userDeatils?.id}
+                isPropertyFavorited={true}
                 key={favorite.id}
                 property={favorite.property}
               />
