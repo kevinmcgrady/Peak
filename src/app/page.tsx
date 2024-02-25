@@ -43,6 +43,7 @@ export default async function Home({ searchParams }: HomeProps) {
                 {getFullDate()}
               </p>
             </div>
+
             <SearchDatePicker />
 
             <FeatureImageSlider

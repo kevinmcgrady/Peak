@@ -11,7 +11,7 @@ import { NavItems } from './NavItems';
 
 export const Navigation = () => {
   return (
-    <nav className='grid grid-cols-3 mt-5 py-5'>
+    <nav className='grid grid-cols-3 mt-5 py-5 items-center'>
       <h1 className='text-2xl font-semibold text-primary-foreground font-shadow'>
         <Link href='/'>Peak</Link>
       </h1>
