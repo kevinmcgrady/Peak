@@ -10,6 +10,7 @@ import { PropertyFeatureCard } from '~/components/property/PropertyFeatureCard';
 import { Hero } from '~/components/site/Hero';
 import { getFullDate } from '~/lib/date-formatting';
 import { findOneProperty, getAllProperties } from '~/lib/queries/properties';
+import { getLoggedInUser } from '~/lib/queries/user';
 
 type HomeProps = {
   searchParams: {
@@ -18,6 +19,8 @@ type HomeProps = {
 };
 
 export default async function Home({ searchParams }: HomeProps) {
+  const userDetails = await getLoggedInUser();
+
   const properties = await getAllProperties();
 
   const mapProperty = await findOneProperty(
@@ -49,7 +52,11 @@ export default async function Home({ searchParams }: HomeProps) {
             >
               {[
                 ...properties.map((property) => (
-                  <PropertyCard key={property.id} property={property} />
+                  <PropertyCard
+                    userId={userDetails?.id}
+                    key={property.id}
+                    property={property}
+                  />
                 )),
               ]}
             </FeatureImageSlider>
@@ -64,7 +71,11 @@ export default async function Home({ searchParams }: HomeProps) {
 
             <div className='grid grid-cols-2 gap-5'>
               {properties.map((property) => (
-                <PropertyFeatureCard key={property.id} property={property} />
+                <PropertyFeatureCard
+                  userId={userDetails?.id}
+                  key={property.id}
+                  property={property}
+                />
               ))}
             </div>
           </BackgroundCard>

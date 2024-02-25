@@ -1,16 +1,28 @@
-import { Property } from '@prisma/client';
-import { Heart, Star } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { PropertyWithFavorites } from '~/lib/types/propertyWith';
+
+import { FavoriteButton } from '../global/FavoriteButton';
 import { AspectRatio } from '../ui/aspect-ratio';
 import { buttonVariants } from '../ui/button';
 
 type PropertyFeatureCardProps = {
-  property: Property;
+  property: PropertyWithFavorites;
+  userId?: string | undefined;
+  displayFavoriteButton?: boolean;
 };
 
-export const PropertyFeatureCard = ({ property }: PropertyFeatureCardProps) => {
+export const PropertyFeatureCard = ({
+  property,
+  userId,
+  displayFavoriteButton = true,
+}: PropertyFeatureCardProps) => {
+  const hasUserFavorited = property.Favorite.find(
+    (favorite) => favorite.userId === userId,
+  );
+
   return (
     <div className='bg-white flex-col p-2 rounded-xl flex gap-x-2 md:flex-row'>
       <div className='w-full md:w-[200px]'>
@@ -29,7 +41,13 @@ export const PropertyFeatureCard = ({ property }: PropertyFeatureCardProps) => {
           <h2 className='text-lg font-semibold text-primary-foreground'>
             {property.title}
           </h2>
-          <Heart size={18} className='inline-block text-primary-foreground' />
+          {displayFavoriteButton && (
+            <FavoriteButton
+              isFavorited={!!hasUserFavorited}
+              propertyId={property.id}
+              color='dark'
+            />
+          )}
         </div>
 
         <p className='text-sm gap-x-1 text-primary-foreground flex'>

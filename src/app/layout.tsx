@@ -7,6 +7,7 @@ import type React from 'react';
 
 import { Footer } from '~/components/site/Footer';
 import { Navigation } from '~/components/site/Navigation';
+import { Toaster } from '~/components/ui/toaster';
 import { cn } from '~/lib/utils';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -39,6 +40,7 @@ export default function RootLayout({
           <Navigation />
           <main className='my-4'>{children}</main>
           <Footer />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

@@ -1,19 +1,28 @@
 'use client';
 
-import { Property } from '@prisma/client';
-import { Heart, Star } from 'lucide-react';
+import { Favorite, Property, User } from '@prisma/client';
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import { PropertyWithFavorites } from '~/lib/types/propertyWith';
+
+import { FavoriteButton } from '../global/FavoriteButton';
 import { AspectRatio } from '../ui/aspect-ratio';
 import { Badge } from '../ui/badge';
 
 type PropertyCardProps = {
-  property: Property;
+  property: PropertyWithFavorites;
+  userId: string | undefined;
 };
 
-export const PropertyCard = ({ property }: PropertyCardProps) => {
+export const PropertyCard = ({ property, userId }: PropertyCardProps) => {
   const router = useRouter();
+  const hasUserFavorited = property.Favorite.find(
+    (favorite) => favorite.userId === userId,
+  );
+
+  console.log(hasUserFavorited);
 
   const handleOnClick = () => {
     router.push(`/?property=${property.slug}`, { scroll: false });
@@ -34,7 +43,10 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
             <span className='font-semibold'>£{property.pricePerNight}</span>
             /night
           </Badge>
-          <Heart className='stroke-white' size={18} />
+          <FavoriteButton
+            isFavorited={!!hasUserFavorited}
+            propertyId={property.id}
+          />
         </div>
         <div className='z-10 absolute bottom-0 p-4'>
           <h3 className='text-lg text-white'>{property.title}</h3>

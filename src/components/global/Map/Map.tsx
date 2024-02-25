@@ -2,17 +2,19 @@
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { Property } from '@prisma/client';
+import { Favorite, Property } from '@prisma/client';
 import { MapPin } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import type { MapRef } from 'react-map-gl';
 import Map, { Layer, Marker, Popup } from 'react-map-gl';
 
+import { PropertyWithFavorites } from '~/lib/types/propertyWith';
+
 import { PropertyFeatureCard } from '../../property/PropertyFeatureCard';
 import { buildingsLayer } from './utils/buildingsLayer';
 
 type MapComponentProps = {
-  property: Property;
+  property: PropertyWithFavorites;
 };
 
 export const MapComponent = ({ property }: MapComponentProps) => {
@@ -58,7 +60,10 @@ export const MapComponent = ({ property }: MapComponentProps) => {
           maxWidth='400'
           offset={20}
         >
-          <PropertyFeatureCard property={property} />
+          <PropertyFeatureCard
+            displayFavoriteButton={false}
+            property={property}
+          />
         </Popup>
       </Map>
     </div>
