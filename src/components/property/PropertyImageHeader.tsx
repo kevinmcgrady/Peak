@@ -12,6 +12,9 @@ export const PropertyImageHeader = ({
   property,
   className,
 }: PropertyImageHeaderProps) => {
+  const firstTwoImages = property.additionalImages.slice(0, 2);
+  const thirdAndForthImages = property.additionalImages.slice(2, 4);
+
   return (
     <div
       className={cn(
@@ -27,41 +30,34 @@ export const PropertyImageHeader = ({
           className='object-cover rounded-tl-xl rounded-bl-xl'
         />
       </div>
+
       <div className='grid grid-rows-2 gap-y-2 col-span-3'>
-        <div className='relative'>
-          <Image
-            src={`/images/greece-hotel.jpg`}
-            alt={property.title}
-            fill
-            className='object-cover'
-          />
-        </div>
-        <div className='relative'>
-          <Image
-            src={`/images/hall.jpg`}
-            alt={property.title}
-            fill
-            className='object-cover'
-          />
-        </div>
+        {firstTwoImages.map((image) => (
+          <div className='relative' key={image}>
+            <Image
+              src={`/images/${image}`}
+              alt={property.title}
+              fill
+              className='object-cover'
+            />
+          </div>
+        ))}
       </div>
+
       <div className='grid grid-rows-2 gap-y-2 col-span-3'>
-        <div className='relative'>
-          <Image
-            src={`/images/holiday-home.jpg`}
-            alt={property.title}
-            fill
-            className='object-cover rounded-tr-xl'
-          />
-        </div>
-        <div className='relative'>
-          <Image
-            src={`/images/see-view.jpg`}
-            alt={property.title}
-            fill
-            className='object-cover rounded-br-xl'
-          />
-        </div>
+        {thirdAndForthImages.map((image, index) => (
+          <div className='relative' key={image}>
+            <Image
+              src={`/images/${image}`}
+              alt={property.title}
+              fill
+              className={cn('object-cover', {
+                'rounded-tr-xl': index === 0,
+                'rounded-br-xl': index === 1,
+              })}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
-import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import { BackgroundCard } from '~/components/global/BackgroundCard';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
 import { PropertyFeatureListing } from '~/components/property/PropertyFeatureListing';
 import { PropertyImageHeader } from '~/components/property/PropertyImageHeader';
 import { PropertyRating } from '~/components/property/PropertyRating';
+import { PropertyReviewCard } from '~/components/property/PropertyReviewCard';
 import { findOneProperty } from '~/queries/properties';
+import { getAllReviews } from '~/queries/reviews';
 
 type PropertySlugPageProps = {
   params: {
@@ -22,6 +22,8 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
     return notFound();
   }
 
+  const reviews = await getAllReviews(property.id);
+
   return (
     <div className='grid grid-cols-12'>
       <div className='col-span-12'>
@@ -31,55 +33,38 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
         <div className='block sm:hidden'>
           <FeatureImageSlider
             title={property.title}
-            subtitle='bjhfgrfghrf'
+            subtitle={`£${property.pricePerNight}/night`}
             isForMobile
           >
-            <div className='relative h-[400px]'>
-              <Image
-                src={`/images/${property.imageUrl}`}
-                alt={property.title}
-                fill
-                className='object-cover'
-              />
-            </div>
-            <div className='relative h-[400px]'>
-              <Image
-                src={`/images/${property.imageUrl}`}
-                alt={property.title}
-                fill
-                className='object-cover'
-              />
-            </div>
-            <div className='relative h-[400px]'>
-              <Image
-                src={`/images/${property.imageUrl}`}
-                alt={property.title}
-                fill
-                className='object-cover'
-              />
-            </div>
-            <div className='relative h-[400px]'>
-              <Image
-                src={`/images/${property.imageUrl}`}
-                alt={property.title}
-                fill
-                className='object-cover'
-              />
-            </div>
-            <div className='relative h-[400px]'>
-              <Image
-                src={`/images/${property.imageUrl}`}
-                alt={property.title}
-                fill
-                className='object-cover'
-              />
-            </div>
+            {[
+              <div key={property.imageUrl} className='relative h-[400px]'>
+                <Image
+                  src={`/images/${property.imageUrl}`}
+                  alt={property.title}
+                  fill
+                  className='object-cover'
+                />
+              </div>,
+              ...property.additionalImages.map((image) => (
+                <div key={image} className='relative h-[400px]'>
+                  <Image
+                    src={`/images/${image}`}
+                    alt={property.title}
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+              )),
+            ]}
           </FeatureImageSlider>
         </div>
       </div>
 
       <div className='col-span-7 mt-5 space-y-5'>
         <h1 className='text-muted text-4xl font-semibold'>{property.title}</h1>
+        <p className='text-muted text-xl font-semibold'>
+          £{property.pricePerNight}/night
+        </p>
         <p className='text-base text-muted'>{property.description}</p>
 
         <hr />
@@ -102,9 +87,7 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
       <div className='col-span-12 mt-5 space-y-5'>
         <hr />
         <PropertyRating rating={property.rating} />
-        <BackgroundCard>
-          <div></div>
-        </BackgroundCard>
+        <PropertyReviewCard reviews={reviews} />
       </div>
     </div>
   );
