@@ -25,6 +25,16 @@ export const findOneProperty = (slug: string) => {
           user: true,
         },
       },
+      PropertyAttractions: {
+        include: {
+          attraction: true,
+        },
+      },
+      PropertyAmenity: {
+        include: {
+          amenity: true,
+        },
+      },
     },
   });
 };

@@ -6,9 +6,11 @@ import { ReviewWithUser } from '~/types/reviewWith';
 import { BackgroundCard } from '../global/BackgroundCard';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
+import { PropertyRating } from './PropertyRating';
 
 type PropertyReviewCardProps = {
   reviews: ReviewWithUser[];
+  propertyRating: number;
 };
 
 const getUserInitials = (name: string) => {
@@ -19,10 +21,14 @@ const getUserInitials = (name: string) => {
   return `${splitFirstName[0]} ${splitLastName[0]}`;
 };
 
-export const PropertyReviewCard = ({ reviews }: PropertyReviewCardProps) => {
+export const PropertyReviewCard = ({
+  reviews,
+  propertyRating,
+}: PropertyReviewCardProps) => {
   return (
     <BackgroundCard>
-      <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+      <PropertyRating rating={propertyRating} />
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mt-5'>
         {reviews.map((review) => (
           <div key={review.id}>
             <div className='flex items-center gap-x-2'>

@@ -8,18 +8,22 @@ datasource db {
 }
 
 model Property {
-  id               String     @id @default(auto()) @map("_id") @db.ObjectId
-  slug             String     @unique
-  lat              String
-  lng              String
-  title            String     @unique
-  description      String
-  rating           Int
-  pricePerNight    Int
-  imageUrl         String
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String @unique
+  lat           String
+  lng           String
+  title         String @unique
+  description   String
+  rating        Int
+  pricePerNight Int
+  imageUrl      String
+
   Favorite         Favorite[]
   Review           Review[]
   additionalImages String[]
+
+  PropertyAttractions PropertyAttractions[]
+  PropertyAmenity     PropertyAmenity[]
 }
 
 model User {
@@ -47,5 +51,51 @@ model Review {
   review     String
   rating     Int
   userId     String   @db.ObjectId
+  propertyId String   @db.ObjectId
+}
+
+enum AmenityType {
+  SWIMMING_POOL
+  GYM
+  FREE_PARKING
+  WIFI
+  PETS_ALLOWED
+  AIR_CONDITIONING
+}
+
+enum AttractionType {
+  PARK
+  MOUNTAINS
+  CAFE
+  RESTAURANTS
+  BIKE_TRAIL
+  MUSEUM
+}
+
+model Amenity {
+  id              String            @id @default(auto()) @map("_id") @db.ObjectId
+  title           AmenityType
+  PropertyAmenity PropertyAmenity[]
+}
+
+model Attraction {
+  id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+  title               AttractionType
+  PropertyAttractions PropertyAttractions[]
+}
+
+model PropertyAttractions {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  attraction   Attraction @relation(fields: [attractionId], references: [id])
+  property     Property   @relation(fields: [propertyId], references: [id])
+  attractionId String     @db.ObjectId
+  propertyId   String     @db.ObjectId
+}
+
+model PropertyAmenity {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  amenity    Amenity  @relation(fields: [amenityId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id])
+  amenityId  String   @db.ObjectId
   propertyId String   @db.ObjectId
 }

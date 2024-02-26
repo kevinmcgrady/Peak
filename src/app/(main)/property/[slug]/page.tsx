@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+import { BackgroundCard } from '~/components/global/BackgroundCard';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
 import { PropertyFeatureListing } from '~/components/property/PropertyFeatureListing';
 import { PropertyImageHeader } from '~/components/property/PropertyImageHeader';
-import { PropertyRating } from '~/components/property/PropertyRating';
 import { PropertyReviewCard } from '~/components/property/PropertyReviewCard';
 import { findOneProperty } from '~/queries/properties';
 import { getAllReviews } from '~/queries/reviews';
@@ -25,7 +25,7 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
   const reviews = await getAllReviews(property.id);
 
   return (
-    <div className='grid grid-cols-12'>
+    <div className='grid grid-cols-12 gap-2'>
       <div className='col-span-12'>
         <div className='hidden sm:block'>
           <PropertyImageHeader property={property} />
@@ -69,30 +69,27 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
             £{property.pricePerNight}/night
           </p>
         </div>
-
         <p className='text-base text-muted'>{property.description}</p>
+        <hr className='border-[1px]' />
 
-        <hr />
-
-        <h2 className='text-muted text-xl font-semibold'>
-          What {property.title} has to offers
-        </h2>
-
-        <PropertyFeatureListing />
-
-        <hr />
-
-        <h2 className='text-muted text-xl font-semibold'>What is near by</h2>
-
-        <PropertyFeatureListing />
+        <PropertyFeatureListing
+          propertyTitle={property.title}
+          amenities={property.PropertyAmenity}
+          attractions={property.PropertyAttractions}
+        />
       </div>
 
-      <div className='col-span-5 mt-5'>booking thing</div>
+      <div className='col-span-5 mt-5'>
+        <BackgroundCard className='sticky top-5'>fjhr</BackgroundCard>
+      </div>
 
-      <div className='col-span-12 mt-5 space-y-5'>
-        <hr />
-        <PropertyRating rating={property.rating} />
-        <PropertyReviewCard reviews={reviews} />
+      <div className='col-span-12 mt-5 mb-5'>
+        {reviews && reviews.length && (
+          <PropertyReviewCard
+            propertyRating={property.rating}
+            reviews={reviews}
+          />
+        )}
       </div>
     </div>
   );
