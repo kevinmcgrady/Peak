@@ -22,7 +22,7 @@ const getUserInitials = (name: string) => {
 export const PropertyReviewCard = ({ reviews }: PropertyReviewCardProps) => {
   return (
     <BackgroundCard>
-      <div className='grid grid-cols-2 gap-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
         {reviews.map((review) => (
           <div key={review.id}>
             <div className='flex items-center gap-x-2'>
@@ -50,7 +50,8 @@ export const PropertyReviewCard = ({ reviews }: PropertyReviewCardProps) => {
                 ))}
               </div>
             </div>
-            <p className='text-sm text-muted mt-2 '>{review.review}</p>
+            <p className='text-sm text-muted mt-2'>{review.review}</p>
+            <hr className='block sm:hidden border-[1px] mt-5' />
           </div>
         ))}
       </div>

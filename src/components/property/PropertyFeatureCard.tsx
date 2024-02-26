@@ -48,8 +48,7 @@ export const PropertyFeatureCard = ({
 
         <p className='text-sm gap-x-1 text-primary-foreground flex'>
           <Star className='fill-primary inline-block stroke-none' size={18} />
-          {property.rating} <span className='text-muted-foreground'>(7)</span>{' '}
-          3.2km
+          {property.rating} <span className='text-muted-foreground'>(7)</span>
         </p>
 
         <div className='flex items-center justify-between gap-x-2 pt-6'>
@@ -67,7 +66,7 @@ export const PropertyFeatureCard = ({
               className: 'rounded-xl',
             })}
           >
-            Details
+            Book
           </Link>
         </div>
       </div>

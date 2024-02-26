@@ -42,7 +42,7 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
                   src={`/images/${property.imageUrl}`}
                   alt={property.title}
                   fill
-                  className='object-cover'
+                  className='object-cover rounded-xl'
                 />
               </div>,
               ...property.additionalImages.map((image) => (
@@ -51,7 +51,7 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
                     src={`/images/${image}`}
                     alt={property.title}
                     fill
-                    className='object-cover'
+                    className='object-cover rounded-xl'
                   />
                 </div>
               )),
@@ -60,11 +60,16 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
         </div>
       </div>
 
-      <div className='col-span-7 mt-5 space-y-5'>
-        <h1 className='text-muted text-4xl font-semibold'>{property.title}</h1>
-        <p className='text-muted text-xl font-semibold'>
-          £{property.pricePerNight}/night
-        </p>
+      <div className='col-span-12 sm:col-span-7 space-y-5'>
+        <div className='hidden sm:block'>
+          <h1 className='text-muted text-4xl font-semibold mt-5'>
+            {property.title}
+          </h1>
+          <p className='text-muted text-xl font-semibold'>
+            £{property.pricePerNight}/night
+          </p>
+        </div>
+
         <p className='text-base text-muted'>{property.description}</p>
 
         <hr />
