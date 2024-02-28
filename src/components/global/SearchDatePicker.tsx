@@ -17,6 +17,7 @@ import { getShortDate } from '~/lib/date-formatting';
 export const SearchDatePicker = () => {
   const [checkinDate, setCheckinDate] = useState<Date>();
   const [checkoutDate, setCheckoutDate] = useState<Date>();
+  const today = new Date();
 
   return (
     <div className='flex gap-1 items-end justify-between'>
@@ -39,8 +40,10 @@ export const SearchDatePicker = () => {
           <PopoverContent className='w-auto p-0'>
             <Calendar
               mode='single'
+              className='bg-white border-none'
               selected={checkinDate}
               onSelect={setCheckinDate}
+              fromDate={today}
               initialFocus
             />
           </PopoverContent>
@@ -58,8 +61,10 @@ export const SearchDatePicker = () => {
           <PopoverContent className='w-auto p-0'>
             <Calendar
               mode='single'
+              className='bg-white border-none'
               selected={checkoutDate}
               onSelect={setCheckoutDate}
+              fromDate={checkinDate}
               initialFocus
             />
           </PopoverContent>
