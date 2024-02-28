@@ -1,44 +1,173 @@
+'use client';
+
+import { addDays } from 'date-fns';
+import { useState } from 'react';
+import { DateRange } from 'react-day-picker';
+
 import { Select, SelectContent, SelectTrigger } from '~/components/ui/select';
+import { getNumberOfNights, getShortDate } from '~/lib/date-formatting';
+import { calculateFee, formatCurrency } from '~/lib/number-formatting';
 
 import { Button } from '../ui/button';
+import { Calendar } from '../ui/calendar';
+import { PropertyBookingGuestSelect } from './PropertyBookingPersonGuest';
 
 type PropertyBookingProps = {
   pricePerNight: number;
+  maxGuests: number;
 };
 
-export const PropertyBooking = ({ pricePerNight }: PropertyBookingProps) => {
-  const priceForStay = pricePerNight * 6;
-  const fee = (priceForStay / 100) * 3;
+export const PropertyBooking = ({
+  pricePerNight,
+  maxGuests,
+}: PropertyBookingProps) => {
+  const today = new Date();
+
+  const [noOfAdults, setNoOfAdults] = useState<number>(1);
+  const [noOfChildren, setNoOfChildren] = useState<number>(0);
+  const [noOfBabies, setNoOfBabies] = useState<number>(0);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+    from: today,
+    to: addDays(today, 2),
+  });
+
+  const adultTitle = `${noOfAdults} ${noOfAdults === 1 ? 'Guest' : 'Guests'}`;
+  const childrenTitle = `, ${noOfChildren} ${
+    noOfChildren === 1 ? 'Child' : 'Children'
+  }`;
+  const babiesTitle = `, ${noOfBabies} ${noOfBabies === 1 ? 'Baby' : 'Babies'}`;
+
+  const noOfNights = getNumberOfNights(
+    dateRange?.to as Date,
+    dateRange?.from as Date,
+  );
+
+  const priceForStay = pricePerNight * noOfNights;
+  const fee = calculateFee(priceForStay);
   const total = priceForStay + fee;
 
   return (
     <div className='p-10 border shadow-lg rounded-xl '>
       <p className='text-muted text-xl font-semibold mb-5'>
-        £{pricePerNight} <span className='font-light text-lg'>night</span>
+        {formatCurrency(pricePerNight)}{' '}
+        <span className='font-light text-lg'>night</span>
       </p>
       <Select>
-        <SelectTrigger className='rounded border-muted mb-5 h-auto'>
-          <div className='flex flex-col items-start'>
-            <p className='text-muted font-semibold'>Guests</p>
-            <p className='text-muted text-sm'>1 Guests</p>
+        <SelectTrigger className='rounded border-muted h-auto border-b-0 rounded-bl-none rounded-br-none'>
+          <div className='grid grid-cols-2 w-full'>
+            <div className='text-left'>
+              <p className='text-muted font-semibold'>Check in</p>
+              <p className='text-muted text-sm'>
+                {getShortDate(dateRange?.from)}
+              </p>
+            </div>
+            <div className='text-left'>
+              <p className='text-muted font-semibold'>Check out</p>
+              <p className='text-muted text-sm'>
+                {getShortDate(dateRange?.to)}
+              </p>
+            </div>
           </div>
         </SelectTrigger>
-        <SelectContent className='border bg-white shadow-lg rounded p-2 text-muted w-full'></SelectContent>
+        <SelectContent className='border bg-white shadow-lg rounded p-2 text-muted w-fit'>
+          <Calendar
+            selected={dateRange}
+            onSelect={setDateRange}
+            numberOfMonths={2}
+            mode='range'
+            fromDate={today}
+          />
+        </SelectContent>
       </Select>
+      <Select>
+        <SelectTrigger className='rounded border-muted mb-5 h-auto rounded-tl-none rounded-tr-none'>
+          <div className='flex flex-col items-start'>
+            <p className='text-muted font-semibold'>Guests</p>
+            <p className='text-muted text-sm'>
+              {!!noOfAdults && adultTitle} {!!noOfChildren && childrenTitle}{' '}
+              {!!noOfBabies && babiesTitle}
+            </p>
+          </div>
+        </SelectTrigger>
+        <SelectContent className='border bg-white shadow-lg rounded p-2 text-muted w-fit'>
+          <PropertyBookingGuestSelect
+            typeOfGuest='Adults'
+            ageRange='Age 13+'
+            value={noOfAdults}
+            disableMinusButton={noOfAdults === 1}
+            disablePlusButton={noOfAdults + noOfChildren === maxGuests}
+            onMinusChange={() =>
+              setNoOfAdults((value) => {
+                if (value === 1) return value;
+                return value - 1;
+              })
+            }
+            onPlusChange={() =>
+              setNoOfAdults((value) => {
+                if (value + noOfChildren === maxGuests) return value;
+                return value + 1;
+              })
+            }
+          />
+
+          <PropertyBookingGuestSelect
+            typeOfGuest='Children'
+            ageRange='Ages 2-12'
+            value={noOfChildren}
+            disableMinusButton={noOfChildren === 0}
+            disablePlusButton={noOfChildren + noOfAdults === maxGuests}
+            onMinusChange={() =>
+              setNoOfChildren((value) => {
+                if (value === 0) return value;
+                return value - 1;
+              })
+            }
+            onPlusChange={() =>
+              setNoOfChildren((value) => {
+                if (value + noOfAdults === maxGuests) return value;
+                return value + 1;
+              })
+            }
+          />
+
+          <PropertyBookingGuestSelect
+            typeOfGuest='Babies'
+            ageRange='Under 2'
+            value={noOfBabies}
+            disableMinusButton={noOfBabies === 0}
+            disablePlusButton={noOfBabies === 5}
+            onMinusChange={() =>
+              setNoOfBabies((value) => {
+                if (value === 0) return value;
+                return value - 1;
+              })
+            }
+            onPlusChange={() =>
+              setNoOfBabies((value) => {
+                if (value === 5) return value;
+                return value + 1;
+              })
+            }
+          />
+        </SelectContent>
+      </Select>
+
       <div className='flex items-center justify-between mb-5 text-sm'>
-        <p>£{pricePerNight} x 6 days</p>
-        <p className='font-semibold'>£{priceForStay}</p>
+        <p className='text-sm text-muted-foreground'>
+          {noOfNights} nights @ {formatCurrency(pricePerNight)} night
+        </p>
+        <p className='font-semibold'>{formatCurrency(priceForStay)}</p>
       </div>
       <div className='flex items-center justify-between mb-5 text-sm'>
-        <p>Service charge</p>
-        <p className='font-semibold'>£{fee}</p>
+        <p className='text-sm text-muted-foreground'>Service charge</p>
+        <p className='font-semibold'>{formatCurrency(fee)}</p>
       </div>
 
       <hr className='mb-5' />
 
       <div className='flex items-center justify-between mb-5 text-sm'>
-        <p>Total</p>
-        <p className='font-semibold'>£{total}</p>
+        <p className='text-lg'>Total</p>
+        <p className='font-semibold text-lg'>{formatCurrency(total)}</p>
       </div>
 
       <Button

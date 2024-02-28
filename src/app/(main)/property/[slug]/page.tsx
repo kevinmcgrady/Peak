@@ -90,7 +90,10 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
 
       <div className='col-span-12 sm:col-span-5 mt-5'>
         <div className='sticky top-5'>
-          <PropertyBooking pricePerNight={property.pricePerNight} />
+          <PropertyBooking
+            maxGuests={property.maxGuests}
+            pricePerNight={property.pricePerNight}
+          />
         </div>
       </div>
 
