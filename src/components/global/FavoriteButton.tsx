@@ -24,9 +24,19 @@ export const FavoriteButton = ({
 
   const handleOnClick = async () => {
     try {
-      await toggleFavorite(propertyId);
+      const response = await toggleFavorite(propertyId);
       router.refresh();
-      toast({ variant: 'default', description: 'Favorite added!' });
+      toast({
+        variant: 'default',
+        description:
+          response?.type && response.type === 'added'
+            ? 'You can find this property in your favorites tab.'
+            : 'This property has been removed from your favorites tab.',
+        title:
+          response?.type && response.type === 'added'
+            ? 'Favorite Added'
+            : 'Favorite Removed',
+      });
     } catch (error) {
       toast({ variant: 'destructive', description: 'There was an issue' });
     }

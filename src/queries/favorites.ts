@@ -22,7 +22,9 @@ export const getUsersFavorites = async () => {
   });
 };
 
-export const toggleFavorite = async (propertyId: string) => {
+export const toggleFavorite = async (
+  propertyId: string,
+): Promise<{ type: 'added' | 'removed' } | null> => {
   const user = await getLoggedInUser();
 
   if (!user) return null;
@@ -35,19 +37,23 @@ export const toggleFavorite = async (propertyId: string) => {
   });
 
   if (favoriteExists) {
-    return db.favorite.delete({
+    await db.favorite.delete({
       where: {
         id: favoriteExists.id,
         userId: user.id,
         propertyId: propertyId,
       },
     });
+
+    return { type: 'removed' };
   } else {
-    return db.favorite.create({
+    await db.favorite.create({
       data: {
         propertyId: propertyId,
         userId: user.id,
       },
     });
+
+    return { type: 'added' };
   }
 };
