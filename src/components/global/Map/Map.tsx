@@ -14,9 +14,13 @@ import { buildingsLayer } from './utils/buildingsLayer';
 
 type MapComponentProps = {
   property: PropertyWithFavorites;
+  hideBookingCard?: boolean;
 };
 
-export const MapComponent = ({ property }: MapComponentProps) => {
+export const MapComponent = ({
+  property,
+  hideBookingCard = false,
+}: MapComponentProps) => {
   const mapRef = useRef<MapRef | null>(null);
   const lat = Number(property.lat);
   const lng = Number(property.lng);
@@ -52,18 +56,20 @@ export const MapComponent = ({ property }: MapComponentProps) => {
         <Marker longitude={lng} latitude={lat} anchor='center'>
           <MapPin size={18} className='fill-secondary stroke-none' />
         </Marker>
-        <Popup
-          latitude={lat}
-          longitude={lng}
-          closeButton={false}
-          maxWidth='400'
-          offset={20}
-        >
-          <PropertyFeatureCard
-            displayFavoriteButton={false}
-            property={property}
-          />
-        </Popup>
+        {!hideBookingCard && (
+          <Popup
+            latitude={lat}
+            longitude={lng}
+            closeButton={false}
+            maxWidth='400'
+            offset={20}
+          >
+            <PropertyFeatureCard
+              displayFavoriteButton={false}
+              property={property}
+            />
+          </Popup>
+        )}
       </MapboxMap>
     </div>
   );

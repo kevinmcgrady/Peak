@@ -69,7 +69,7 @@ export const PropertyFeatureListing = ({
           );
         })}
       </ul>
-      <hr className='border-[1px]' />
+      <hr />
       <h2 className='text-muted text-xl font-semibold'>What is near by</h2>
       <ul className='grid grid-cols-2 gap-5 text-muted font-light'>
         {attractions.map((attraction) => {

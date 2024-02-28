@@ -38,8 +38,10 @@ export const PropertyCard = ({
 
         <div className='z-10 absolute top-0 right-0 flex p-4 left-0 items-center justify-between'>
           <Badge variant='secondary'>
-            <span className='font-semibold'>£{property.pricePerNight}</span>
-            /night
+            <p className='font-semibold'>
+              £{property.pricePerNight}{' '}
+              <span className='font-light'>night</span>
+            </p>
           </Badge>
           <FavoriteButton
             isFavorited={isPropertyFavorited}

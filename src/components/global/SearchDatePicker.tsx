@@ -65,7 +65,7 @@ export const SearchDatePicker = () => {
           </PopoverContent>
         </Popover>
       </div>
-      <Button variant='secondary' className='rounded-tr-xl rounded-br-xl'>
+      <Button variant='secondary' className='rounded-tr rounded-br'>
         Search
       </Button>
     </div>

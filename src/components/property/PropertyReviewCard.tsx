@@ -57,11 +57,11 @@ export const PropertyReviewCard = ({
               </div>
             </div>
             <p className='text-sm text-muted mt-2'>{review.review}</p>
-            <hr className='block sm:hidden border-[1px] mt-5' />
+            <hr className='block sm:hidden mt-5' />
           </div>
         ))}
       </div>
-      <Button variant='outline' className='rounded-xl self-start'>
+      <Button variant='outline' className='rounded self-start'>
         View all 16 reviews
       </Button>
     </BackgroundCard>

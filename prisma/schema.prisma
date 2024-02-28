@@ -17,6 +17,11 @@ model Property {
   rating        Int
   pricePerNight Int
   imageUrl      String
+  maxGuests     Int
+  noOfBedrooms  Int
+  noOfBathrooms Int
+  noOfBeds      Int
+  country       String
 
   Favorite         Favorite[]
   Review           Review[]

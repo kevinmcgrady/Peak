@@ -55,15 +55,15 @@ export const PropertyFeatureCard = ({
           <p className='text-sm'>
             <span className='text-base font-semibold text-primary-foreground'>
               £{property.pricePerNight}
-            </span>
-            /night
+            </span>{' '}
+            <span className='font-light'>night</span>
           </p>
           <Link
             href={`/property/${property.slug}`}
             className={buttonVariants({
-              size: 'sm',
               variant: 'secondary',
-              className: 'rounded-xl',
+              className: '!rounded',
+              size: 'sm',
             })}
           >
             Book
