@@ -13,6 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '~/components/ui/accordion';
+import { formatCurrency } from '~/lib/number-formatting';
 import { findOneProperty } from '~/queries/properties';
 import { getAllReviews } from '~/queries/reviews';
 
@@ -40,7 +41,7 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
         <div className='block sm:hidden'>
           <FeatureImageSlider
             title={property.title}
-            subtitle={`£${property.pricePerNight} night`}
+            subtitle={`${formatCurrency(property.pricePerNight)} night`}
             isForMobile
           >
             {[

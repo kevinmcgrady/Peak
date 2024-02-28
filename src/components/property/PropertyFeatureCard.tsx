@@ -2,6 +2,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { formatCurrency } from '~/lib/number-formatting';
 import { PropertyWithFavorites } from '~/types/propertyWith';
 
 import { FavoriteButton } from '../global/FavoriteButton';
@@ -54,7 +55,7 @@ export const PropertyFeatureCard = ({
         <div className='flex items-center justify-between gap-x-2 pt-6'>
           <p className='text-sm'>
             <span className='text-base font-semibold text-primary-foreground'>
-              £{property.pricePerNight}
+              {formatCurrency(property.pricePerNight)}
             </span>{' '}
             <span className='font-light'>night</span>
           </p>

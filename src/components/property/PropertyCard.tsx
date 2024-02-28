@@ -1,10 +1,10 @@
 'use client';
 
-import { Favorite, Property, User } from '@prisma/client';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import { formatCurrency } from '~/lib/number-formatting';
 import { PropertyWithFavorites } from '~/types/propertyWith';
 
 import { FavoriteButton } from '../global/FavoriteButton';
@@ -39,7 +39,7 @@ export const PropertyCard = ({
         <div className='z-10 absolute top-0 right-0 flex p-4 left-0 items-center justify-between'>
           <Badge variant='secondary'>
             <p className='font-semibold'>
-              £{property.pricePerNight}{' '}
+              {formatCurrency(property.pricePerNight)}{' '}
               <span className='font-light'>night</span>
             </p>
           </Badge>
