@@ -98,17 +98,17 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
         </div>
       </div>
 
-      <div className='mt-10 col-span-12'>
+      <div id='location' className='mt-10 col-span-12'>
         <h2 className='text-muted text-xl font-semibold mb-10'>
           Where you&apos;ll be staying
         </h2>
-        <div className='relative h-[400px]'>
+        <div className='relative h-[400px] -z-10'>
           <MapComponent hideBookingCard property={property} />
         </div>
       </div>
 
       <div className='col-span-12 mt-10'>
-        <h2 className='text-muted text-xl font-semibold mb-10'>
+        <h2 id='reviews' className='text-muted text-xl font-semibold mb-10'>
           What other people think
         </h2>
         {reviews && reviews.length && (
@@ -119,7 +119,7 @@ const PropertySlugPage = async ({ params }: PropertySlugPageProps) => {
         )}
       </div>
 
-      <div className='col-span-12 mb-10'>
+      <div id='thingsYouShouldKnow' className='col-span-12 mb-10'>
         <h2 className='text-muted text-xl font-semibold mb-10'>
           Things you should know
         </h2>

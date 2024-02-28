@@ -1,14 +1,12 @@
 import { notFound } from 'next/navigation';
 
 import { BackgroundCard } from '~/components/global/BackgroundCard';
-import { CategoryNav } from '~/components/global/CategoryNav';
 import { FeatureImageSlider } from '~/components/global/FeatureImageSlider';
 import { MapComponent } from '~/components/global/Map/Map';
 import { SearchDatePicker } from '~/components/global/SearchDatePicker';
 import { PropertyCard } from '~/components/property/PropertyCard';
 import { PropertyFeatureCard } from '~/components/property/PropertyFeatureCard';
 import { Hero } from '~/components/site/Hero';
-import { getFullDate } from '~/lib/date-formatting';
 import { findOneProperty, getAllProperties } from '~/queries/properties';
 import { getLoggedInUser } from '~/queries/user';
 
@@ -37,13 +35,6 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className='grid grid-cols-12 gap-4'>
         <div className='gap-y-5 flex flex-col col-span-12 lg:col-span-7'>
           <BackgroundCard>
-            <div className='flex items-center justify-between'>
-              <CategoryNav categories={['Hotel', 'House', 'Village']} />
-              <p className='text-sm font-semibold text-muted'>
-                {getFullDate()}
-              </p>
-            </div>
-
             <SearchDatePicker />
 
             <FeatureImageSlider

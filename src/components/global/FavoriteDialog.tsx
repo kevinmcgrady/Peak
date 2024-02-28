@@ -41,7 +41,7 @@ export const FavoriteDialog = async () => {
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {hasFavorites && (
-          <ScrollArea className='h-72'>
+          <ScrollArea className='h-72 '>
             {favorites.map((favorite) => (
               <PropertyFeatureCard
                 isPropertyFavorited={true}

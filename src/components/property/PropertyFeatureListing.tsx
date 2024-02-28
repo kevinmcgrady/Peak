@@ -49,7 +49,7 @@ export const PropertyFeatureListing = ({
 }: PropertyFeatureListingProps) => {
   return (
     <>
-      <h2 className='text-muted text-xl font-semibold'>
+      <h2 id='amenities' className='text-muted text-xl font-semibold'>
         What {propertyTitle} has to offers
       </h2>
       <ul className='grid grid-cols-2 gap-5 text-muted font-light'>
@@ -70,7 +70,9 @@ export const PropertyFeatureListing = ({
         })}
       </ul>
       <hr />
-      <h2 className='text-muted text-xl font-semibold'>What is near by</h2>
+      <h2 id='nearBy' className='text-muted text-xl font-semibold'>
+        What is near by
+      </h2>
       <ul className='grid grid-cols-2 gap-5 text-muted font-light'>
         {attractions.map((attraction) => {
           const userFriendlyName = attraction.attraction.title

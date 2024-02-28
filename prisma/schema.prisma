@@ -29,6 +29,7 @@ model Property {
 
   PropertyAttractions PropertyAttractions[]
   PropertyAmenity     PropertyAmenity[]
+  Booking             Booking[]
 }
 
 model User {
@@ -38,6 +39,7 @@ model User {
 
   Favorite Favorite[]
   Review   Review[]
+  Booking  Booking[]
 }
 
 model Favorite {
@@ -103,4 +105,18 @@ model PropertyAmenity {
   property   Property @relation(fields: [propertyId], references: [id])
   amenityId  String   @db.ObjectId
   propertyId String   @db.ObjectId
+}
+
+model Booking {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  total        Int
+  checkin      DateTime
+  checkout     DateTime
+  noOfAdults   Int      @default(1)
+  noOfChildren Int      @default(0)
+  noOfBabies   Int      @default(0)
+  user         User     @relation(fields: [userId], references: [id])
+  property     Property @relation(fields: [propertyId], references: [id])
+  userId       String   @db.ObjectId
+  propertyId   String   @db.ObjectId
 }
