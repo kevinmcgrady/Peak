@@ -68,11 +68,12 @@ export const PropertyBooking = ({
               ]}
             />
 
-            <div className='flex items-center justify-center gap-x-2'>
-              <p className='text-lg font-semibold'>
-                {formatCurrency(pricePerNight)}
+            <div className='flex items-center justify-center gap-x-5'>
+              <p className='text-lg font-semibold whitespace-nowrap'>
+                {formatCurrency(pricePerNight)}{' '}
+                <span className='font-light'>night</span>
               </p>
-              <span className='font-light'>night</span>
+
               <Button
                 className='w-full rounded bg-gradient-to-tl from-[#00c6ff] to-[#0072ff]'
                 variant='secondary'
