@@ -26,7 +26,12 @@ export const FavoriteDialog = async () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='ghost' size='icon' className='rounded-xl'>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='rounded-xl'
+          id='favoriteButton'
+        >
           <Heart
             className={cn({
               'fill-primary-foreground': hasFavorites,

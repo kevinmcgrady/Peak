@@ -14,7 +14,12 @@ export const NotificationDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant='ghost' size='icon' className='rounded-xl'>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='rounded-xl'
+          id='notificationButton'
+        >
           <Bell size={20} />
         </Button>
       </DialogTrigger>

@@ -11,6 +11,10 @@
     "test": "vitest --watch=false",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
+    "e2e:headless": "cypress run --e2e",
+    "e2e": "cypress open",
+    "component": "cypress open --component",
+    "component:headless": "cypress run --component",
     "prepare": "husky"
   },
   "dependencies": {
@@ -80,6 +84,8 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitest/coverage-v8": "^1.4.0",
     "autoprefixer": "^10.0.1",
+    "cypress": "^13.7.1",
+    "cypress-ssr-localhost-mocker": "^0.0.4",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.1.0",
