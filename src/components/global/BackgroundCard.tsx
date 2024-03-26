@@ -1,6 +1,6 @@
 import type React from 'react';
 
-import { cn } from '~/lib/utils';
+import { cn } from '../../lib/utils';
 
 enum BackgroundColorMap {
   gray = 'bg-gray-100',
